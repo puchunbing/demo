@@ -2,8 +2,8 @@ package config
 
 import (
 	logs "demo/utils"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var (
@@ -13,7 +13,7 @@ var (
 func InitMySql() *gorm.DB {
 	conf := GetConfig()
 	dsn := conf.MySql.DbUser + `:` + conf.MySql.DbPass + `@tcp(` + conf.MySql.DbUrl + `)/` + conf.MySql.DbName + `?charset=utf8mb4&parseTime=True&loc=Local`
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open("mysql", dsn)
 	if err != nil {
 		logs.Logger.Debug("数据库连接失败")
 		return nil

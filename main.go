@@ -1,6 +1,7 @@
 package main
 
 import (
+	"demo/auto"
 	"demo/config"
 	"demo/router"
 	"github.com/gin-gonic/gin"
@@ -17,5 +18,5 @@ func main() {
 func init() {
 	config.LoadConfig()
 	config.InitMySql()
-	//go auto.AutoMigrate()
+	go auto.AutoMigrate()
 }

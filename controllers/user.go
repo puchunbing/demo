@@ -22,12 +22,12 @@ func init() {
 func (this *UserControllers) AddUser(c *gin.Context) {
 
 	user := &model.UserInfo{
-		Pic:     "/imge/123.jpg",
-		Address: "深圳市",
-		Email:   "123@163.com",
+		Pic:     "/imge/789.jpg",
+		Address: "四川省成都市",
+		Email:   "1982938@163.com",
 		User: model.User{
-			Age:  17,
-			Name: "小李",
+			Age:  29,
+			Name: "小涨",
 		},
 	}
 	err := services.InfoServiceDao.Add(user)
@@ -51,6 +51,9 @@ func (this *UserControllers) GetUser(c *gin.Context) {
 	//查询info_id=1的数据放入userinfo中，并关联查询到User字段对应的数据
 	db.Preload("User").Find(&userinfo, "info_id = ?", 1)
 	msg := &logs.ResultInfo{}
+	logs.Logger.Debug("挂了")
+	logs.Logger.Info("第一级别")
+	logs.Logger.Error("error")
 	msg.Code = "0"
 	msg.Message = "查询成功"
 	msg.Data = userinfo

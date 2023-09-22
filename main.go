@@ -16,7 +16,8 @@ func main() {
 }
 
 func init() {
-	config.LoadConfig()
-	config.InitMySql()
-	go auto.AutoMigrate()
+	config.LoadConfig()   //初始化配置文件
+	config.InitMySql()    //初始化MySQL
+	go auto.AutoMigrate() //gorm 数据库迁移
+	router.NewLogger()    //初始化日志
 }

@@ -62,3 +62,19 @@ func geturlContent(url string, timeout time.Duration) (string, error) {
 
 	}
 }
+
+func (this *ContextTestControllers) TimeAfterDemo(c *gin.Context) {
+	ch := make(chan string)
+	go func() {
+		time.Sleep(5 * time.Second)
+		ch <- "124"
+	}()
+	select {
+	case resp := <-ch:
+		fmt.Println(resp)
+		return
+	case <-time.After(3 * time.Second): //超时
+		fmt.Println("超时了")
+		return
+	}
+}

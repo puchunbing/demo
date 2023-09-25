@@ -12,5 +12,6 @@ func CollectRoute(r *gin.Engine) *gin.Engine {
 	r.GET("/user", controllers.UserControllersInstance.GetUser)     //查询
 	r.PUT("/user", controllers.UserControllersInstance.Update)      //修改
 
+	r.GET("/timeout", controllers.ContextTestControllersInstance.TimeOutTest) //context超时处理
 	return r
 }

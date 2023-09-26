@@ -73,3 +73,17 @@ func (this *UserControllers) Update(c *gin.Context) {
 	msg.Message = "修改成功"
 	c.JSONP(200, msg)
 }
+
+func (this *UserControllers) Delete(c *gin.Context) {
+	db := config.GetMySql()
+	var userinfo model.UserInfo
+	db.Preload("User").Find(&userinfo, "info_id =?", 1)
+	//借助userinfo删除user信息，info数据不变
+	//db.Delete(&userinfo.User)
+	//删除userinfo
+	db.Delete(&userinfo)
+	msg := &logs.ResultInfo{}
+	msg.Code = "0"
+	msg.Message = "删除成功"
+	c.JSONP(200, msg)
+}
